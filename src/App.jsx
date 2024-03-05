@@ -1,9 +1,12 @@
 import "./App.css";
+import FilteringSystem from "./components/FilterSystem";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
-      <h1>hello</h1>
+      <Navbar />
+      <FilteringSystem />
     </>
   );
 }
