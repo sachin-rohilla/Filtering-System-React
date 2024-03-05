@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, removeToCart } from "../utils/cartSlice";
 import { toast } from "react-toastify";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cartData = useSelector((store) => store.cart.cartData);
@@ -25,6 +26,28 @@ const Cart = () => {
     }
   };
   console.log("hello", cartData);
+
+  if (!cartData?.length) {
+    return (
+      <div className="w-full h-full flex justify-center items-center mt-20">
+        <div className="flex flex-col items-center">
+          <img
+            className="w-96 h-96 object-cover"
+            src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png?f=webp"
+          />
+          <h1 className="text-xl font-semibold text-center">
+            Oops... your cart is empty
+          </h1>
+          <Link
+            to="/"
+            className="bg-yellow-400 text-white rounded-lg px-4 py-2 mt-2 "
+          >
+            Continue Shopping
+          </Link>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="mt-20 w-full">
       <h1 className="text-xl font-semibold text-center">Cart</h1>
