@@ -1,0 +1,7 @@
+#swal2-title {
+  font-size: 24px !important;
+}
+.swal2-styled.swal2-confirm {
+  background-color: #facc15;
+  border-color: #facc15;
+}
