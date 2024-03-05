@@ -9,7 +9,7 @@ const Navbar = () => {
         <BsShop className="text-3xl" />
         <h1 className="font-semibold text-lg">Shop</h1>
       </div>
-      <HiOutlineShoppingCart className="text-2xl" />
+      <HiOutlineShoppingCart className="text-2xl " />
     </nav>
   );
 };

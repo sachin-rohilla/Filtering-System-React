@@ -4,8 +4,12 @@ import CategoryFilter from "./CategoryFilter";
 import ColorFilter from "./ColorFilter";
 import SelectOptionFilter from "./SelectOptionFilter";
 import SearchFilter from "./SearchFilter";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../utils/cartSlice";
 
 const FilteringSystem = () => {
+  const dispatch = useDispatch();
+  const cartData = useSelector((store) => store.cart.cartData);
   const [filterData, setFilterData] = useState({
     category: "",
     color: "",
@@ -86,7 +90,7 @@ const FilteringSystem = () => {
     setFilterDataList(filteredList);
   }, [filterData]);
 
-  console.log(filterDataList);
+  console.log(cartData);
   return (
     <div className="flex gap-4 w-full px-16 mt-20">
       <div className="border rounded-lg px-10 py-4 h-fit ">
@@ -112,6 +116,7 @@ const FilteringSystem = () => {
             handleChange={handleChange}
           />
         </div>
+
         <div className="flex items-center flex-wrap gap-4 mt-4">
           {filterDataList?.length > 0 &&
             filterDataList?.map((data) => (
@@ -131,7 +136,12 @@ const FilteringSystem = () => {
                 </p>
                 <p>{data?.star}</p>
                 <p className="text-sm font-semibold"> $ {data?.newPrice}</p>
-                <button className="w-full py-1.5 bg-yellow-400 text-white rounded-lg mt-2 text-sm">
+                <button
+                  className="w-full py-1.5 bg-yellow-400 text-white rounded-lg mt-2 text-sm"
+                  onClick={() => {
+                    dispatch(addToCart(data));
+                  }}
+                >
                   + Add to cart
                 </button>
               </div>
