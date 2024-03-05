@@ -40,7 +40,7 @@ const Cart = () => {
       <div className="w-full h-full flex justify-center items-center mt-20">
         <div className="flex flex-col items-center">
           <img
-            className="w-96 h-96 object-cover"
+            className="w-[350px] h-76 object-cover"
             src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-4085814-3385483.png?f=webp"
           />
           <h1 className="text-xl font-semibold text-center">
@@ -112,28 +112,33 @@ const Cart = () => {
               </div>
             ))}
         </div>
-
-        <div className="w-full lg:w-[30%] shadow-md h-fit p-4 rounded-md border">
-          <h2 className="font-semibold">Order Details</h2>
-          <div className="text-sm flex flex-col gap-1 mt-2">
-            <div className="flex justify-between ">
-              <p>Bag Total</p>
-              <p>₹{totalAmount}</p>
-            </div>
-            <div className="flex justify-between text-yellow-400 ">
-              <p>Bag Discount</p>
-              <p>-₹{bagDiscount}</p>
-            </div>
-            <div className="flex justify-between ">
-              <p>Delievery Fee</p>
-              <p>₹{deliveryFee}</p>
-            </div>
-            <hr />
-            <div className="flex justify-between font-semibold ">
-              <p>Order Total</p>
-              <p>₹{orderTotal}</p>
+        <div className="w-full lg:w-[30%] ">
+          <div className="shadow-md h-fit p-4 rounded-md border">
+            <h2 className="font-semibold">Order Details</h2>
+            <div className="text-sm flex flex-col gap-1 mt-2">
+              <div className="flex justify-between ">
+                <p>Bag Total</p>
+                <p>₹{totalAmount}</p>
+              </div>
+              <div className="flex justify-between text-yellow-400 ">
+                <p>Bag Discount</p>
+                <p>-₹{bagDiscount}</p>
+              </div>
+              <div className="flex justify-between ">
+                <p>Delievery Fee</p>
+                <p>₹{deliveryFee}</p>
+              </div>
+              <hr />
+              <div className="flex justify-between font-semibold ">
+                <p>Order Total</p>
+                <p>₹{orderTotal}</p>
+              </div>
             </div>
           </div>
+          <button className="bg-yellow-400 py-2 rounded-lg text-white w-full mt-4">
+            {" "}
+            Place Order{" "}
+          </button>
         </div>
       </div>
     </div>
