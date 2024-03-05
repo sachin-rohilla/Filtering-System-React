@@ -29,8 +29,10 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <div className="pb-8">
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </div>
     </>
   );
 }

@@ -1,42 +1,102 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeToCart } from "../utils/cartSlice";
+import { decrement, increment, removeToCart } from "../utils/cartSlice";
 import { toast } from "react-toastify";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 const Cart = () => {
   const cartData = useSelector((store) => store.cart.cartData);
+  const cartValue = useSelector((store) => store.cart.value);
   const dispatch = useDispatch();
   const handleRemoveToCart = (id) => {
     dispatch(removeToCart(id));
     toast.success("Item removed from cart");
   };
+  const handleIncrease = (id) => {
+    if (cartValue < 10) {
+      dispatch(increment());
+    }
+  };
+  const handleDecrease = (id) => {
+    if (cartValue > 1) {
+      dispatch(decrement());
+    } else {
+      dispatch(removeToCart(id));
+    }
+  };
   console.log("hello", cartData);
   return (
-    <div className="mt-20">
-      <div className="flex flex-col items-center">
-        {cartData?.length > 0 &&
-          cartData.map((data) => (
-            <div
-              key={data?.id}
-              className="flex shadow-md flex-col it  justify-center border p-4 rounded-md w-[80%] mt-4 h-60"
-            >
-              <img
-                src={data?.img}
-                alt={data?.id}
-                className=" object-fill w-40 min-h-[120px]"
-              />
-              <p className="text-sm mt-1 ">
-                {data?.title?.length > 20
-                  ? data?.title?.slice(0, 20) + "..."
-                  : data?.title}
-              </p>
-              <p>{data?.star}</p>
-              <p className="text-sm font-semibold"> $ {data?.newPrice}</p>
-              <button onClick={() => handleRemoveToCart(data?.id)}>
-                Remove
-              </button>
+    <div className="mt-20 w-full">
+      <h1 className="text-xl font-semibold text-center">Cart</h1>
+      <div className=" flex  gap-4 px-16">
+        <div className="w-[70%]">
+          {cartData?.length > 0 &&
+            cartData.map((data) => (
+              <div
+                key={data?.id}
+                className=" flex justify-between items-center  shadow-md   border px-10 py-4 rounded-md mt-4 h-60"
+              >
+                <div className="w-full flex">
+                  <div>
+                    <img
+                      src={data?.img}
+                      alt={data?.id}
+                      className=" object-fill w-52 min-h-[120px]"
+                    />
+                  </div>
+                  <div className="ml-8">
+                    <p className="text-base mt-4 ">{data?.title}</p>
+                    <p>{data?.star}</p>
+                    <p className="text-sm font-semibold mt-1">
+                      {" "}
+                      $ {data?.newPrice}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <button onClick={() => handleDecrease(data?.id)}>
+                        <CiCircleMinus className="text-2xl" />
+                      </button>
+                      {cartValue}
+                      <button>
+                        <CiCirclePlus
+                          className="text-2xl"
+                          onClick={() => handleIncrease(data?.id)}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  className="border border-yellow-400 text-yellow-400 font-semibold h-fit w-36 py-2 rounded-lg"
+                  onClick={() => handleRemoveToCart(data?.id)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+        </div>
+
+        <div className="w-[30%] shadow-md h-fit p-4 rounded-md">
+          <h2 className="font-semibold">Order Details</h2>
+          <div className="text-sm flex flex-col gap-1 mt-2">
+            <div className="flex justify-between ">
+              <p>Bag Total</p>
+              <p>₹598</p>
             </div>
-          ))}
+            <div className="flex justify-between ">
+              <p>Bag Discount</p>
+              <p>₹40</p>
+            </div>
+            <div className="flex justify-between ">
+              <p>Delievery Fee</p>
+              <p>₹99</p>
+            </div>
+            <hr />
+            <div className="flex justify-between font-semibold ">
+              <p>Order Total</p>
+              <p>₹598</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
