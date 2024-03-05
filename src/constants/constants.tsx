@@ -8,7 +8,7 @@ const FilteringSystemData = [
     // star: <AiFillStar className="rating-star" />,
     reviews: "(123 reviews)",
     prevPrice: "$140,00",
-    newPrice: "200",
+    newPrice: 200,
     company: "Nike",
     color: "white",
     category: "sneakers",
