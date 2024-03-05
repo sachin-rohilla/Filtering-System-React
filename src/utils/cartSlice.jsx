@@ -14,11 +14,17 @@ export const cartSlice = createSlice({
       state.value -= 1;
     },
     addToCart: (state, action) => {
-      state.cartData.push(action.payload);
+      state.cartData = [...state.cartData, action.payload];
+    },
+    removeToCart: (state, action) => {
+      state.cartData = state.cartData.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
-export const { increment, decrement, addToCart } = cartSlice.actions;
+export const { increment, decrement, addToCart, removeToCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

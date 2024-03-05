@@ -6,6 +6,8 @@ import SelectOptionFilter from "./SelectOptionFilter";
 import SearchFilter from "./SearchFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../utils/cartSlice";
+import { MdCheckCircle } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const FilteringSystem = () => {
   const dispatch = useDispatch();
@@ -90,7 +92,11 @@ const FilteringSystem = () => {
     setFilterDataList(filteredList);
   }, [filterData]);
 
-  console.log(cartData);
+  const handleAddToCart = (data) => {
+    if (!cartData.includes(data)) dispatch(addToCart(data));
+  };
+
+  console.log(cartData, "ram");
   return (
     <div className="flex gap-4 w-full px-16 mt-20">
       <div className="border rounded-lg px-10 py-4 h-fit ">
@@ -137,12 +143,21 @@ const FilteringSystem = () => {
                 <p>{data?.star}</p>
                 <p className="text-sm font-semibold"> $ {data?.newPrice}</p>
                 <button
-                  className="w-full py-1.5 bg-yellow-400 text-white rounded-lg mt-2 text-sm"
-                  onClick={() => {
-                    dispatch(addToCart(data));
-                  }}
+                  className={`w-full flex justify-center py-1.5  rounded-lg mt-2 text-sm ${
+                    cartData?.includes(data)
+                      ? "border border-yellow-400 text-yellow-400"
+                      : "bg-yellow-400 text-white"
+                  }`}
+                  onClick={() => handleAddToCart(data)}
                 >
-                  + Add to cart
+                  {cartData?.includes(data) ? (
+                    <Link to="/cart" className="flex items-center gap-2">
+                      <MdCheckCircle className="text-xl" />
+                      <p>Go to Cart</p>
+                    </Link>
+                  ) : (
+                    "Add to Cart"
+                  )}
                 </button>
               </div>
             ))}
