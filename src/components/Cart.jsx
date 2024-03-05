@@ -20,6 +20,7 @@ const Cart = () => {
     toast.success("Item removed from cart");
   };
   const handleIncrease = (id) => {
+    console.log(id, "yes");
     if (cartValue < 5) {
       dispatch(increment());
     }
@@ -81,7 +82,7 @@ const Cart = () => {
                       {" "}
                       $ {data?.newPrice}
                     </p>
-                    <div className="flex items-center gap-2 mt-2">
+                    {/* <div className="flex items-center gap-2 mt-2">
                       <button onClick={() => handleDecrease(data?.id)}>
                         <CiCircleMinus className="text-2xl" />
                       </button>
@@ -97,7 +98,7 @@ const Cart = () => {
                           disabled={cartValue === 5}
                         />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <button
@@ -117,7 +118,7 @@ const Cart = () => {
               <p>Bag Total</p>
               <p>₹{totalAmount}</p>
             </div>
-            <div className="flex justify-between ">
+            <div className="flex justify-between text-yellow-400 ">
               <p>Bag Discount</p>
               <p>-₹{bagDiscount}</p>
             </div>
