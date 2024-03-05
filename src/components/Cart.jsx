@@ -22,7 +22,7 @@ const Cart = () => {
   const handleIncrease = (id) => {
     console.log(id, "yes");
     if (cartValue < 5) {
-      dispatch(increment());
+      dispatch(increment(id));
     }
   };
   const handleDecrease = (id) => {
@@ -58,7 +58,9 @@ const Cart = () => {
   }
   return (
     <div className="mt-20 w-full">
-      <h1 className="text-xl font-semibold text-center">Cart</h1>
+      <h1 className="text-xl font-semibold text-center">
+        Cart Items - {cartData?.length}
+      </h1>
       <div className=" flex flex-col  lg:flex-row lg:gap-4 px-8 lg:px-16 mt-4">
         <div className="w-full lg:w-[70%] ">
           {cartData?.length > 0 &&
@@ -82,7 +84,7 @@ const Cart = () => {
                       {" "}
                       $ {data?.newPrice}
                     </p>
-                    {/* <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-2 mt-2">
                       <button onClick={() => handleDecrease(data?.id)}>
                         <CiCircleMinus className="text-2xl" />
                       </button>
@@ -98,7 +100,7 @@ const Cart = () => {
                           disabled={cartValue === 5}
                         />
                       </button>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
                 <button

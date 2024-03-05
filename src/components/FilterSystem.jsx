@@ -100,8 +100,6 @@ const FilteringSystem = () => {
     }
   };
 
-  console.log(cartData, "ram");
-
   return (
     <div className="flex gap-4 w-full px-16 mt-20">
       <div className="border shadow-md rounded-lg px-10 py-4 h-fit ">

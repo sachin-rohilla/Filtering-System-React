@@ -8,7 +8,7 @@ export const cartSlice = createSlice({
     totalAmount: 0,
   },
   reducers: {
-    increment: (state) => {
+    increment: (state, action) => {
       state.value += 1;
       state.totalAmount = calculateTotalOrder(state.cartData, state.value);
     },
