@@ -26,6 +26,10 @@ export const cartSlice = createSlice({
       );
       state.totalAmount = calculateTotalOrder(state.cartData, state.value);
     },
+
+    clearCart: (state) => {
+      state.cartData = [];
+    },
   },
 });
 
@@ -33,7 +37,7 @@ const calculateTotalOrder = (cart, qty) => {
   return cart.reduce((total, item) => total + qty * item.newPrice, 0);
 };
 
-export const { increment, decrement, addToCart, removeToCart } =
+export const { increment, decrement, addToCart, removeToCart, clearCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

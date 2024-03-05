@@ -1,20 +1,29 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, removeToCart } from "../utils/cartSlice";
+import {
+  clearCart,
+  decrement,
+  increment,
+  removeToCart,
+} from "../utils/cartSlice";
 import { toast } from "react-toastify";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const Cart = () => {
   const cartData = useSelector((store) => store.cart.cartData);
   const cartValue = useSelector((store) => store.cart.value);
   const totalAmount = useSelector((store) => store.cart.totalAmount);
+
   const bagDiscount = 40;
   const deliveryFee = 99;
 
   const orderTotal = totalAmount + deliveryFee - bagDiscount;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleRemoveToCart = (id) => {
     dispatch(removeToCart(id));
     toast.success("Item removed from cart");
@@ -32,6 +41,24 @@ const Cart = () => {
       dispatch(removeToCart(id));
       toast.success("Item removed from cart");
     }
+  };
+
+  const handlePlaceOrder = () => {
+    Swal.fire({
+      title: " Do you want to place the order?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Order placed successfully!", "", "success");
+        setTimeout(() => {
+          navigate("/");
+          dispatch(clearCart());
+        }, 2000);
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
   console.log("hello", cartData, totalAmount);
 
@@ -135,7 +162,10 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          <button className="bg-yellow-400 py-2 rounded-lg text-white w-full mt-4">
+          <button
+            className="bg-yellow-400 py-2 rounded-lg text-white w-full mt-4"
+            onClick={handlePlaceOrder}
+          >
             {" "}
             Place Order{" "}
           </button>
