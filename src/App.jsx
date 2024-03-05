@@ -3,6 +3,8 @@ import "./App.css";
 import FilteringSystem from "./components/FilterSystem";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +30,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }

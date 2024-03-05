@@ -1,10 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeToCart } from "../utils/cartSlice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const cartData = useSelector((store) => store.cart.cartData);
   const dispatch = useDispatch();
+  const handleRemoveToCart = (id) => {
+    dispatch(removeToCart(id));
+    toast.success("Item removed from cart");
+  };
   console.log("hello", cartData);
   return (
     <div className="mt-20">
@@ -27,11 +32,7 @@ const Cart = () => {
               </p>
               <p>{data?.star}</p>
               <p className="text-sm font-semibold"> $ {data?.newPrice}</p>
-              <button
-                onClick={() => {
-                  dispatch(removeToCart(data?.id));
-                }}
-              >
+              <button onClick={() => handleRemoveToCart(data?.id)}>
                 Remove
               </button>
             </div>

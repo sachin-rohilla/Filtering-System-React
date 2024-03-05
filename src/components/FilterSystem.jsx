@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../utils/cartSlice";
 import { MdCheckCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FilteringSystem = () => {
   const dispatch = useDispatch();
@@ -93,7 +94,10 @@ const FilteringSystem = () => {
   }, [filterData]);
 
   const handleAddToCart = (data) => {
-    if (!cartData.includes(data)) dispatch(addToCart(data));
+    if (!cartData.includes(data)) {
+      dispatch(addToCart(data));
+      toast.success("Added to cart");
+    }
   };
 
   console.log(cartData, "ram");
